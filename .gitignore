@@ -1,30 +1,112 @@
-### IntelliJ IDEA ###
+# ===========================================
+# Java Project Best .gitignore
+# ===========================================
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.zip
+*.tar.gz
+
+# Virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+# ===========================================
+# Build Tools
+# ===========================================
+
+# Maven
+target/
+pom.xml
+pom.xml.asc
+pom.xml.lastUpdated
+dependency-reduced-pom.xml
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Ant
+build.xml
+lib/
+
+# ===========================================
+# IDEs
+# ===========================================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-.kotlin
 
-### Eclipse ###
-.apt_generated
+# Eclipse
 .classpath
-.factorypath
 .project
-.settings
-.springBeans
-.sts4-cache
+.settings/
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
+# VS Code
 .vscode/
 
-### Mac OS ###
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+
+# BlueJ
+*.ctxt
+*.pkh
+
+# ===========================================
+# OS
+# ===========================================
+
+# Mac OS
 .DS_Store
+.DS_Store?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ===========================================
+# Lab Specific
+# ===========================================
+
+# All out directories (compiled classes)
+lab1/*/out/
+*/out/
+out/
+
+# All src directories (optional - keep if you want to commit sources)
+# lab1/*/src/
+
+.claude/
+
+# ===========================================
+# Misc
+# ===========================================
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~

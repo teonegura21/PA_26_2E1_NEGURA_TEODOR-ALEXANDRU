@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class SocialNetwork {
@@ -24,9 +23,17 @@ public class SocialNetwork {
         return relationships.getOrDefault(node, new ArrayList<>());
     }
 
+    public int getImportance(Node node) {
+        return getNeighbors(node).size();
+    }
+
     public void printNetwork() {
-        for (Node node : nodes) {
-            System.out.println(node + " -> " + getNeighbors(node));
+        List<Node> sortedNodes = new ArrayList<>(nodes);
+        sortedNodes.sort((a, b) -> Integer.compare(getImportance(b), getImportance(a)));
+
+        System.out.println("Network (sorted by importance):");
+        for (Node node : sortedNodes) {
+            System.out.println(node + " [importance=" + getImportance(node) + "] -> " + getNeighbors(node));
         }
     }
 
@@ -35,14 +42,18 @@ public class SocialNetwork {
 
         Person p1 = new Programmer("Alice", 25, "1998-05-15", "Java");
         Person p2 = new Designer("Bob", 30, "1993-08-22", "Figma");
+        Person p3 = new Person("Charlie", 28, "1990-01-10");
         Company c1 = new Company("Google", 100000);
 
         network.addNode(p1);
         network.addNode(p2);
+        network.addNode(p3);
         network.addNode(c1);
 
         network.addRelationship(p1, p2);
         network.addRelationship(p1, c1);
+        network.addRelationship(p2, c1);
+        network.addRelationship(p2, p3);
 
         network.printNetwork();
     }

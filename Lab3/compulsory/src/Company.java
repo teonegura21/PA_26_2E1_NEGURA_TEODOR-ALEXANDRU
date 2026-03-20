@@ -1,16 +1,16 @@
-
-public class Company implements Comparable<Company> {
+public class Company implements Profile {
     private String name;
 
     public Company(String name) {
         this.name = name;
     }
 
+    @Override
     public String getName() { return name; }
 
     @Override
-    public int compareTo(Company other) {
-        return this.name.compareTo(other.name);
+    public int compareTo(Profile other) {
+        return this.name.compareTo(other.getName());
     }
 
     @Override

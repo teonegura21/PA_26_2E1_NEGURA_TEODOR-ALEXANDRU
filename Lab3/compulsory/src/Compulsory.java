@@ -1,21 +1,26 @@
-
 import java.util.*;
 
 public class Compulsory {
     public static void main(String[] args) {
-        List<Person> persons = new ArrayList<>();
-        persons.add(new Person("Alice", 25));
-        persons.add(new Person("Bob", 30));
-        persons.add(new Person("Charlie", 22));
+        List<Profile> profiles = new ArrayList<>();
+        
+        profiles.add(new Person("Alice", 25));
+        profiles.add(new Person("Bob", 30));
+        profiles.add(new Person("Charlie", 22));
+        profiles.add(new Company("Google"));
+        profiles.add(new Company("Microsoft"));
+        profiles.add(new Company("Apple"));
 
-        Collections.sort(persons);
-        System.out.println("Persons: " + persons);
+        System.out.println("Before sorting:");
+        for (Profile p : profiles) {
+            System.out.println(p);
+        }
 
-        Set<Company> companies = new TreeSet<>();
-        companies.add(new Company("Google"));
-        companies.add(new Company("Microsoft"));
-        companies.add(new Company("Apple"));
+        Collections.sort(profiles);
 
-        System.out.println("Companies: " + companies);
+        System.out.println("\nAfter sorting by name:");
+        for (Profile p : profiles) {
+            System.out.println(p);
+        }
     }
 }

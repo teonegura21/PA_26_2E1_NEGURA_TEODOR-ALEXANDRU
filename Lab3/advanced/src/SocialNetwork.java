@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class SocialNetwork {
@@ -26,9 +25,17 @@ public class SocialNetwork {
 
     public List<Node> getNodes() { return nodes; }
 
+    public int getImportance(Node node) {
+        return getNeighbors(node).size();
+    }
+
     public void printNetwork() {
-        for (Node node : nodes) {
-            System.out.println(node + " -> " + getNeighbors(node));
+        List<Node> sortedNodes = new ArrayList<>(nodes);
+        sortedNodes.sort((a, b) -> Integer.compare(getImportance(b), getImportance(a)));
+
+        System.out.println("Network (sorted by importance):");
+        for (Node node : sortedNodes) {
+            System.out.println(node + " [importance=" + getImportance(node) + "] -> " + getNeighbors(node));
         }
     }
 

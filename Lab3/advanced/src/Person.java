@@ -1,4 +1,3 @@
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,7 +5,7 @@ public class Person implements Comparable<Person>, Node {
     private String name;
     private int age;
     private String birthDate;
-    private Map<String, String> relationships;
+    private Map<Node, String> relationships;
 
     public Person(String name, int age, String birthDate) {
         this.name = name;
@@ -18,10 +17,14 @@ public class Person implements Comparable<Person>, Node {
     public String getName() { return name; }
     public int getAge() { return age; }
     public String getBirthDate() { return birthDate; }
-    public Map<String, String> getRelationships() { return relationships; }
+    public Map<Node, String> getRelationships() { return relationships; }
 
-    public void addRelationship(Person person, String relationship) {
-        relationships.put(person.getName(), relationship);
+    public void addRelationship(Node node, String relationshipType) {
+        relationships.put(node, relationshipType);
+    }
+
+    public int getRelationshipCount() {
+        return relationships.size();
     }
 
     @Override

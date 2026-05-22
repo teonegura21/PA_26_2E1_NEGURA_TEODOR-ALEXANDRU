@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 11 - JPA Quiz Game Persistence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #eaeaea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        header h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+        }
+        .badge {
+            display: inline-block;
+            background: #e94560;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.15);
+        }
+        .card h2 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card p {
+            color: #c0c0c0;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .endpoints {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .endpoint {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            border-left: 3px solid #e94560;
+        }
+        .method {
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+        }
+        .method.get { background: #4ecca3; color: #1a1a2e; }
+        .method.post { background: #f9a826; color: #1a1a2e; }
+        .method.put { background: #4facfe; color: #1a1a2e; }
+        .path {
+            color: #eaeaea;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .feature {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .feature .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .feature h3 {
+            color: #e94560;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .feature p {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin: 0;
+        }
+        .links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+        }
+        .btn.secondary {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn.secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #606060;
+            font-size: 0.9rem;
+        }
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(78, 204, 163, 0.15);
+            color: #4ecca3;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ecca3;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .tech {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #c0c0c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Lab 11 - JPA Persistence</h1>
+            <p>Quiz Game Database Layer built with Spring Boot + JPA + H2</p>
+            <div class="badge">Programare Avansata 2025-2026</div>
+        </header>
+
+        <div class="status">
+            <div class="status-dot"></div>
+            <span>Server is running on port 8080</span>
+        </div>
+
+        <div class="card">
+            <h2>About This Project</h2>
+            <p>
+                This application is the <strong>persistent database layer</strong> for the multiplayer quiz game 
+                from <strong>Lab 10</strong>. It uses <strong>JPA (Java Persistence API)</strong> with 
+                <strong>Hibernate</strong> as the provider and <strong>Spring Data JPA</strong> for repositories.
+                All quiz data (players, questions, games, results) is stored in an embedded <strong>H2 database</strong>.
+            </p>
+            <div class="tech-stack">
+                <span class="tech">Spring Boot 3.2.5</span>
+                <span class="tech">Hibernate 6.4</span>
+                <span class="tech">Spring Data JPA</span>
+                <span class="tech">H2 Database</span>
+                <span class="tech">Java 17</span>
+                <span class="tech">Criteria API</span>
+                <span class="tech">JPQL</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Features Implemented</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="icon">&#128203;</div>
+                    <h3>5 JPA Entities</h3>
+                    <p>Player, Question, Game, GameResult, AuditLog with proper relationships</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">&#128279;</div>
+                    <h3>Relationships</h3>
+                    <p>One-to-Many and Many-to-Many with bidirectional mapping</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">&#128270;</div>
+                    <h3>JPQL Queries</h3>
+                    <p>Custom read and transactional modifying queries with timing logs</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">&#128295;</div>
+                    <h3>Criteria API</h3>
+                    <p>Dynamic search with multiple optional filters on game results</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">&#128210;</div>
+                    <h3>Auditing</h3>
+                    <p>Automatic audit trail for all database changes</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">&#127942;</div>
+                    <h3>REST API</h3>
+                    <p>Full CRUD endpoints for all entities</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>REST API Endpoints</h2>
+            <p>All endpoints are prefixed with <code>/api</code></p>
+            <div class="endpoints">
+                <div class="endpoint"><span class="method post">POST</span><span class="path">/api/players</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/players</span></div>
+                <div class="endpoint"><span class="method post">POST</span><span class="path">/api/questions</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/questions</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/questions/search</span></div>
+                <div class="endpoint"><span class="method post">POST</span><span class="path">/api/games</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/games</span></div>
+                <div class="endpoint"><span class="method post">POST</span><span class="path">/api/results</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/results/player/{id}</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/results/game/{id}</span></div>
+                <div class="endpoint"><span class="method put">PUT</span><span class="path">/api/results/{id}/score</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/results/search</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span class="path">/api/audit</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Quick Links</h2>
+            <div class="links">
+                <a href="/h2-console" class="btn secondary">&#128187; H2 Console</a>
+                <a href="/api/players" class="btn">&#128100; View Players</a>
+                <a href="/api/questions" class="btn">&#10067; View Questions</a>
+                <a href="/api/games" class="btn">&#127918; View Games</a>
+                <a href="/api/audit" class="btn secondary">&#128210; View Audit Logs</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built for Programare Avansata (Advanced Programming) - Lab 11</p>
+            <p>Faculty of Computer Science, Alexandru Ioan Cuza University of Iasi</p>
+        </footer>
+    </div>
+</body>
+</html>

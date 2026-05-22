@@ -1,0 +1,92 @@
+[
+  {
+    "text": "What is the capital of France?",
+    "options": ["Paris", "London", "Berlin", "Madrid"],
+    "correctIndex": 0,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "correctIndex": 1,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the largest ocean on Earth?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "correctIndex": 3,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Who wrote 'Romeo and Juliet'?",
+    "options": ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+    "correctIndex": 1,
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the chemical symbol for gold?",
+    "options": ["Go", "Gd", "Au", "Ag"],
+    "correctIndex": 2,
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In what year did World War II end?",
+    "options": ["1943", "1944", "1945", "1946"],
+    "correctIndex": 2,
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the value of Pi to two decimal places?",
+    "options": ["3.12", "3.14", "3.16", "3.18"],
+    "correctIndex": 1,
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which element has the atomic number 1?",
+    "options": ["Helium", "Oxygen", "Hydrogen", "Carbon"],
+    "correctIndex": 2,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the hardest natural substance on Earth?",
+    "options": ["Gold", "Iron", "Diamond", "Platinum"],
+    "correctIndex": 2,
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Who painted the Mona Lisa?",
+    "options": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+    "correctIndex": 2,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the speed of light in vacuum (approx)?",
+    "options": ["300,000 km/s", "150,000 km/s", "400,000 km/s", "200,000 km/s"],
+    "correctIndex": 0,
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which programming language was created by James Gosling?",
+    "options": ["C++", "Python", "Java", "C#"],
+    "correctIndex": 2,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What does JVM stand for?",
+    "options": ["Java Virtual Machine", "Java Variable Method", "Joint Virtual Memory", "Java Verified Module"],
+    "correctIndex": 0,
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which data structure uses LIFO?",
+    "options": ["Queue", "Stack", "Array", "Linked List"],
+    "correctIndex": 1,
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the time complexity of binary search?",
+    "options": ["O(n)", "O(log n)", "O(n^2)", "O(1)"],
+    "correctIndex": 1,
+    "difficulty": "HARD"
+  }
+]
